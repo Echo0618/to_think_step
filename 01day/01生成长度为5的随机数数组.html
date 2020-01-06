@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>递归算法</title>
+</head>
+<body>
+    <pre>题目：用递归算法实现，数组长度为5且元素的随机数在2-32间不重复的值
+这是一道大题目，把考点拆成了4个小项；需要侯选人用递归算法实现（限制15行代码以内实现；限制时间10分钟内完成）：
+a) 生成一个长度为5的空数组arr。
+b) 生成一个（2－32）之间的随机整数rand。
+c) 把随机数rand插入到数组arr内，如果数组arr内已存在与rand相同的数字，则重新生成随机数rand并插入到arr内[需要使用递归实现，不能使用for/while等循环]
+d) 最终输出一个长度为5，且内容不重复的数组arr。
+</pre>
+
+<script>
+    var arr = new Array(5) //声明一个长度为5的数组 arr
+    var rand =  Math.floor(Math.random()*31+2)
+    var i = 0
+    randArray (arr, rand)
+    function randArray (arr, rand) {
+        if(arr.indexOf(rand)<0){ // 判断rand是否是arr数组中的元素
+            arr[i] = rand
+            i++
+        } else 
+            rand =   Math.floor(Math.random()*31+2)
+        if(i === arr.length){
+            console.log(arr)
+            return
+        } else 
+            randArray(arr, rand)
+    }
+</script>
+    
+</body>
+</html>

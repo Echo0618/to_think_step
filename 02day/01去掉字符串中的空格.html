@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        一：主要考察正则表达式： 正则表达式是在 /正则表达式/  
+        非打印字符：/s表示：匹配任何空白字符 包括空格,制表符,换页符
+        定位符： ^:匹配输入字符串开始的位置。
+                $:匹配输入字符串结尾的位置。 </p>
+    <p>   二：string.split([separator],[limit])  其中separator可以使字符串或正则表达式 ，limit 可返回数组的最大长度，如果不设置会把整个字符串全部分割，不考虑数组长度  返回值为array数组类型</p>
+    <p>   三：array.join([separator]) 把数组转换成字符串，可以用设置的separator拼接</p>
+    <p>   四：string.replace(searchvalue,newvalue) searchvalue要寻找的字符串或符合匹配的正则表达式，newvalue要替换的字符串  返回值为string字符串</p>
+    <h3>写一个方法去掉字符串中的空格</h3>
+    <pre style="background-color:rgba(0,0,0,.8);color:white;border-radius:3px;max-height:400px;overflow:auto">
+        var str = 'echo guanyue ark'
+        delBlankfun1(str)
+        delBlankfun2(str)
+        delBlankfun3(str)
+
+        // 方法1 常规js 
+        function delBlankfun1 (str) {
+            if (typeof str ==="string"){
+                var newstr = str.split(' ').join('')
+                console.log('delBlankfun1', newstr)
+            } else{
+                alert('str不属于字符串请重新确认')
+            }
+        }
+        // 方法2 正则表达式
+        function delBlankfun2 (str) {
+            var req = /\s+/g
+            if (typeof str === 'string') {
+                console.log('delBlankfun2', str.replace(/\s+/g,''))
+            } else {
+                alert('str不属于字符串请重新确认')
+            }
+        }
+        // 方法3 常规js map,forEach
+        function delBlankfun3 (str) {
+            if (typeof str ==="string"){
+                var newstr = ''
+                // str.split(' ').map(item => {
+                //     newstr += item
+                // })
+                str.split(' ').forEach(item => {
+                    newstr += item
+                })
+                console.log('delBlankfun3', newstr)
+            } else{
+                alert('str不属于字符串请重新确认')
+            }
+        }
+    </pre>
+    <h3>拔高题：写一个方法去掉字符串中的空格，要求传入不同的类型分别能去掉前、后、前后、中间的空格</h3>
+    <pre style="background-color:rgba(0,0,0,.8);color:white;border-radius:3px;max-height:400px;overflow:auto">
+        function deleSpac(str,direction) { // 1 串的模板 2 清除哪边空格
+            let Reg = '';
+            switch(direction) {
+                case 'left' : // 去除左边
+                    Reg = /^[\s]+/g;
+                    break;
+                case 'right' : // 去除右边
+                    Reg = /([\s]*)$/g;
+                    break;
+                case 'both' : // 去除两边
+                    Reg = /(^\s*)|(\s*$)/g
+                    break;
+                default :   // 没传默认全部，且为下去除中间空格做铺垫
+                    Reg = /[\s]+/g;
+                    break;
+            }
+            let newStr = str.replace(Reg,'');
+            if ( direction == 'middle' ){
+                let RegLeft = str.match(/(^\s*)/g)[0]; // 保存右边空格
+                let RegRight = str.match(/(\s*$)/g)[0]; // 保存左边空格
+                newStr = RegLeft + newStr + RegRight; // 将空格加给清完全部空格后的字符串
+            }
+            return newStr;
+        }
+    </pre>
+    
+    <script>
+        var str = '  echo  guan yue  ark   '
+        delBlankfun1(str)
+        delBlankfun2(str)
+        delBlankfun3(str)
+        console.log(4, deleSpac(str,'middle'))
+
+        // 方法1 常规js 
+        function delBlankfun1 (str) {
+            if (typeof str ==="string"){
+                var newstr = str.split(' ').join('')
+                console.log('delBlankfun1', newstr)
+            } else{
+                alert('str不属于字符串请重新确认')
+            }
+        }
+        // 方法2 正则表达式
+        function delBlankfun2 (str) {
+            var req = /\s+/g
+            if (typeof str === 'string') {
+                console.log('delBlankfun2', str.replace(/\s*/g,''))
+            } else {
+                alert('str不属于字符串请重新确认')
+            }
+        }
+        // 方法3 常规js map,forEach
+        function delBlankfun3 (str) {
+            if (typeof str ==="string"){
+                var newstr = ''
+                // str.split(' ').map(item => {
+                //     newstr += item
+                // })
+                str.split(' ').forEach(item => {
+                    newstr += item
+                })
+                console.log('delBlankfun3', newstr)
+            } else{
+                alert('str不属于字符串请重新确认')
+            }
+        }
+        // 拔高题 可以删除指定空格
+        function deleSpac(str,direction) { // 1 串的模板 2 清除哪边空格
+            let Reg = '';
+            switch(direction) {
+                case 'left' : // 去除左边
+                    Reg = /^[\s]+/g;
+                    break;
+                case 'right' : // 去除右边
+                    Reg = /([\s]*)$/g;
+                    break;
+                case 'both' : // 去除两边
+                    Reg = /(^\s*)|(\s*$)/g
+                    break;
+                default :   // 没传默认全部，且为下去除中间空格做铺垫
+                    Reg = /[\s]+/g;
+                    break;
+            }
+            let newStr = str.replace(Reg,'');
+            if ( direction == 'middle' ){
+                let RegLeft = str.match(/(^\s*)/g)[0]; // 保存右边空格
+                let RegRight = str.match(/(\s*$)/g)[0]; // 保存左边空格
+                newStr = RegLeft + newStr + RegRight; // 将空格加给清完全部空格后的字符串
+            }
+            return newStr;
+        }
+    </script>
+</body>
+</html>
