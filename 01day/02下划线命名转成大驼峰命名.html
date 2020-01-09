@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>下划线命名转驼峰</title>
-</head>
-<body>
+  </head>
+  <body>
     <pre>题目：写一个方法把下划线命名转成大驼峰命名</pre>
     <script>
-        var str = 'echo_guanyue_ark'// 要转化的字符串
-        toCamel(str)
-        function toCamel(str){
-            console.log(typeof str)
-            if(typeof str !=='string'){
-                alert('请输入一个字符串表达式')
-            }else{
-                var arr = str.split('_')
-                // console.log(arr)
-                var newstr = ''
-                arr.forEach(element => {
-                    newstr += element.substr(0,1).toUpperCase()+element.substr(1)
-                });
-                console.log(newstr)
-            }
+      var str = 'echo_guanyue_ark'; // 要转化的字符串
+      toCamel(str);
+      function toCamel(str) {
+        console.log(typeof str);
+        if (typeof str !== 'string') {
+          alert('请输入一个字符串表达式');
+        } else {
+          var arr = str.split('_');
+          // console.log(arr)
+          var newstr = '';
+          arr.forEach(element => {
+            newstr += element.substr(0, 1).toUpperCase() + element.substr(1);
+          });
+          console.log(newstr);
         }
+      }
     </script>
-</body>
+  </body>
 </html>
