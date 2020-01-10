@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/styles/default.css" />
+    <script src="../lib/highlight.pack.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+</head>
+<body>
+    <p>写一个把字符串大小写切换的方法</p>
+    <p>
+        思路：ASCII码表中A-Z对应的十进制数为65-90，a-z对应的十进制数为97-122，相同字母的大小写之间相差32个数，可以通过大小写字母相加减，切换字母大小写
+    </p>
+    <p>
+        1.stringObject.charCodeAt(index)  charCodeAt() 方法可返回指定位置的字符的 Unicode 编码。这个返回值是 0 - 65535 之间的整数。
+    </p>
+    <p>
+        2.String.fromCharCode() 可接受一个指定的 Unicode 值，然后返回一个字符串。<br>
+        注意：该方法是 String 的静态方法，字符串中的每个字符都由单独的 Unicode 数字编码指定。使用语法： String.fromCharCode()。
+    </p>
+    <pre>
+        <code class="language-javaScript">
+            function uppercaseLowercaseToggle(str){
+                if(str.typeof === 'string'){
+                    alert('请输入字符串')
+                }else {
+                    return str.split('').map(item => {
+                        const i = item.charCodeAt()
+                        if (i < 65 || i > 122 || i > 90 && i < 97){
+                            return item
+                        }
+                        if (i <= 90) {
+                            return item =  String.fromCharCode(i + 32)
+                        } else {
+                            return item =  String.fromCharCode(i - 32)
+                        }
+                    }).join('')
+                }
+            }
+            console.log('str', uppercaseLowercaseToggle('Echo_guanyue_Ark'))
+        </code>
+    </pre>
+    <script>
+        function uppercaseLowercaseToggle(str){
+            if(str.typeof === 'string'){
+                alert('请输入字符串')
+            }else {
+                return str.split('').map(item => {
+                    const i = item.charCodeAt()
+                    if (i < 65 || i > 122 || i > 90 && i < 97){
+                        return item
+                    }
+                    if (i <= 90) {
+                        return item =  String.fromCharCode(i + 32)
+                    } else {
+                        return item =  String.fromCharCode(i - 32)
+                    }
+                }).join('')
+            }
+        }
+        console.log('str', uppercaseLowercaseToggle('Echo_guanyue_Ark'))
+
+    </script>
+</body>
+</html>
