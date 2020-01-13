@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>写一个判断数据类型的方法</p>
+    <p>
+        知识点：1、typeof 是原生js方法 返回六种数据类型（string,number,Symbol(ECMAScript 2015 新增),undefined,boolean,function,object）<br>
+        2、regexObj.test()方法执行一个检索，用来查看正则表达式与指定的字符串是否匹配。返回 true 或 false。str 是用来与正则表达式匹配的字符串<br>
+        3、RegExp.$1-$9包含括号子串匹配的正则表达式的静态和只读属性。非标准的，不建议在生产环境中使用<br>
+    </p>
+    <script>
+        function type(obj) {
+            return /^\[object (\w*)]$/.test(Object.prototype.toString.call(obj)) ? RegExp.$1 : 'unknown';
+        }
+        console.log(type('hello')); // String
+        console.log(type(1)); // Number
+        console.log(type(Number(1))); // Number
+        console.log(type({})); // Object
+        console.log(type([])); // Array
+        console.log(type(new Date())); // Date
+        console.log(type(Symbol())); // Symbol
+        console.log(type(new RegExp())); // RegExp
+        console.log(type(Math)); // Math
+        console.log(type(window)); // Window
+        console.log(type(null)); // Null
+        console.log(type(undefined)); // Undefined
+        console.log(type(new Error())); // Error
+        console.log(type(Promise)); // Function
+    </script>
+</body>
+</html>

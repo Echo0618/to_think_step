@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>写一个字符串加密的方法</p>
+    <p>思路：字符串加密解密的原理是字符串每一个字符</p>
+    <script>
+        function encodeStr(str, key) {
+        return str
+            .split("")
+            .map(item => {
+            return item.charCodeAt() * key;
+            })
+            .join("#");
+        }
+        function decodeStr(str, key) {
+        return str
+            .split("#")
+            .map(item => {
+            return String.fromCharCode(+item / key);
+            })
+            .join("");
+        }
+
+        console.log(encodeStr("hello world", 665));
+        console.log(decodeStr(encodeStr("hello world", 665), 665));
+    </script>
+</body>
+</html>
