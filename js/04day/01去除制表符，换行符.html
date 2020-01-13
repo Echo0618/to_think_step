@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>写一个去除制表符和换行符的方法</p>
+    <script>
+        var delSymbol = function(str, mode) {
+            if(typeof str !== 'string'){
+                alert('请输入字符串')
+            }else{
+                let Reg = ''
+                switch (mode) {
+                    case 'newLine':
+                        Reg = /[\n\r]*/g
+                        break
+                    case 'tab':
+                        Reg = /\t*/g
+                        break
+                    default:
+                        Reg = /[\t\n\r]*/g 
+                        break
+                }
+                return str.replace(Reg, '')
+            }
+        }    
+        var str = 'aaa\nbbb\rccc\tddd   eee\n\r\tfff'
+        console.log('newLine', delSymbol(str,'newLine'))
+        console.log('tab', delSymbol(str,'tab'))
+        console.log('default', delSymbol(str))
+    </script>
+</body>
+</html>
