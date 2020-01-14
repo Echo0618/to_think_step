@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../lib/styles/default.css" />
+    <script src="../../lib/highlight.pack.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+</head>
+<body>
+    <p>数组去重的方法（支持多重数组）</p>
+    <p>思想：多维数先降重为一维数组，再基于new Set去重。<br>Set它允许你存储任何类型的唯一值，不管是原始值还是对象引用</p>
+    <pre>
+        <code class="language-javaScript">
+            // 数组降维 （递归）
+            function flat(arr, target) {
+                arr.forEach(item => {
+                    if (Array.isArray(item)) {
+                        flat(item, target)
+                    } else {
+                        target.push(item)
+                    }
+                })
+            }
+            // 把降维好的数组放入一个新数组中接收
+            function flatArr(arr) {
+                let result = []
+                flat(arr, result)
+                return result
+            }
+            // 将单维数组降重
+            function uniqueArr(arr) {
+                return [...new Set(flatArr(arr))]
+            }
+            const result = uniqueArr([1, 2, 3, 4, [3, 4, [4, 6]]])
+            console.log(result) // 1,2,3,4,6
+        </code>
+    </pre>
+    <script>
+        // 数组降维 （递归）
+        function flat(arr, target) {
+            arr.forEach(item => {
+                if (Array.isArray(item)) {
+                    flat(item, target)
+                } else {
+                    target.push(item)
+                }
+            })
+        }
+        // 把降维好的数组放入一个新数组中接收
+        function flatArr(arr) {
+            let result = []
+            flat(arr, result)
+            return result
+        }
+        // 将单维数组降重
+        function uniqueArr(arr) {
+            return [...new Set(flatArr(arr))]
+        }
+        const result = uniqueArr([1, 2, 3, 4, [3, 4, [4, 6]]])
+        console.log(result) // 1,2,3,4,6
+    </script>
+</body>
+</html>
