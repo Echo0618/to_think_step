@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>简要描述下什么是回调函数并写一个例子出来</p>
+    <p>回调函数：一个函数被作为参数传给另一个MainFunction函数，在MainFunction函数中被调用。回调函数不会被马上执行，他会在MainFunction满粗一定条件之后被调用</p>
+    <script>
+        function mainFunction (callback){
+            setTimeout(function(){
+                let a = 2,b = 3
+                result = a * b
+                callback(result)
+            },3000)
+            console.log('我是主函数，我正在执行')
+        }
+        function callbackFunction (result){
+            console.log('我是回调函数', result)
+        }
+        // mainFunction(callbackFunction)
+        // ========================================
+        function Main (flag, message, callback) {
+            if(flag){
+                callback ('string', message) 
+            }else{
+                callback ('日期类型', message)
+            }
+        }
+        function callback (param1, param2) {
+            console.log(param2 + param1)
+        }
+        Main(typeof '' === 'string', '我是字符串', callback)
+    </script>
+</body>
+</html>
