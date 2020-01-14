@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../lib/styles/default.css" />
+    <script src="../../lib/highlight.pack.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+</head>
+<body>
+    <p>写一个获取当前url查询字符串中的参数的方法</p>
+    <pre>
+        <code  class="language-javaScript">
+            // Plan A
+            function urlParam(){
+                const param = {};
+                location.search.replace(/([^&=?]+)=([^&]+)/g,(m,$1,$2)=> {param[$1] = $2});
+                return param;
+            }
+            console.log(urlParam())
+            // Plan B
+            function getParam() {
+                const url = 'https://www.baidu.com/s?wd=%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F&rsv_spt=1&rsv_iqid=0x957390bb001283e5&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8'
+                if (typeof url !=="string") return
+                var param = {}
+                url.match(/([^&=?]+)=([^&]+)/g).map(item => {
+                    var arr = [key, value] = item.split('=')
+                    param[arr[0]] = arr[1]
+                })
+                console.log(param)
+            }
+            getParam()
+        </code>
+    </pre>
+    <script>
+        // Plan A
+        function urlParam(){
+            const param = {};
+            location.search.replace(/([^&=?]+)=([^&]+)/g,(m,$1,$2)=> {param[$1] = $2});
+            return param;
+        }
+        console.log(urlParam())
+        // Plan B
+        function getParam() {
+            const url = 'https://www.baidu.com/s?wd=%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F&rsv_spt=1&rsv_iqid=0x957390bb001283e5&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8'
+            if (typeof url !=="string") return
+            var param = {}
+            url.match(/([^&=?]+)=([^&]+)/g).map(item => {
+                var arr = [key, value] = item.split('=')
+                param[arr[0]] = arr[1]
+            })
+            console.log(param)
+        }
+        getParam()
+    </script>
+</body>
+</html>
