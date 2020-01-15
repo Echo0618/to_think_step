@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>判断设备来源</p>
+    <script>
+        deviceType()
+            window.addEventListener('resize', function(){
+            deviceType()
+        })
+
+        function deviceType(){
+            var ua = navigator.userAgent;
+            var agent = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+            for(var i=0; i < agent.length; i++){
+                if(ua.indexOf(agent[i])>0){
+                    alert(agent[i])
+                    break
+                }
+            }
+        }
+
+        function unction_validBrowser(){ 
+            var u_agent = navigator.userAgent; 
+            var browser_name='Failed to identify the browser'; 
+            if(u_agent.indexOf('Firefox')>-1){ 
+                browser_name='Firefox'; 
+            }else if(u_agent.indexOf('Chrome')>-1){ 
+                browser_name='Chrome'; 
+            }else if(u_agent.indexOf('Trident')>-1&&u_agent.indexOf('rv:11')>-1){ 
+                browser_name='IE11'; 
+            }else if(u_agent.indexOf('MSIE')>-1&&u_agent.indexOf('Trident')>-1){ 
+                browser_name='IE(8-10)'; 
+            }else if(u_agent.indexOf('MSIE')>-1){ 
+                browser_name='IE(6-7)'; 
+            }else if(u_agent.indexOf('Opera')>-1){ 
+                browser_name='Opera'; 
+            }else{ 
+                browser_name+=',info:'+u_agent; 
+            } 
+            document.write('browser_name:'+browser_name+'<br>'); 
+            document.write('u_agent:'+u_agent+'<br>'); 
+        }
+        unction_validBrowser()
+    </script>
+</body>
+</html>
