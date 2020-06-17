@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>页面自适应</title>
+</head>
+<body>
+    <div>
+        <h1 class="h1">nihao</h1>
+        <h1  class="h2">nihao</h1>
+        <h1  class="h3">nihao</h1>
+        <img src="./img/鬼灭之刃.jpg" alt="">
+    </div>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .h1{
+        font-size: 2rem;
+    }
+    .h2{
+        font-size: 32px;
+    }
+    .h3{
+        font-size: 2em;
+    }
+    img {
+        max-width: 100%;
+        width: auto;
+    }
+    @media only screen and (max-width: 500px) and (min-width:400px) {
+    body {
+        background-color: lightblue;
+    }
+}
+</style>
+</body>
+
+</html>

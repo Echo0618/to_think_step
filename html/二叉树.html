@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		
+		/*二叉树节点基本样式*/
+		
+		.node_1,.node_2,.node_3,.node_4,.node_5{
+			border: 2px solid #1C86EE;
+			float: left;
+			padding: 5px;
+			margin: 5px;
+			box-sizing: content-box;
+			background: #FFFFFF;
+			border-radius: 10px;
+			color:#1C86EE ;
+		}
+		.node_1{
+			width: 800px;
+			height: 300px;
+		}
+		.node_2{
+			width: 350px;
+			height: 250px;
+		}
+		.node_3{
+			width: 125px;
+			height: 210px;
+		}
+		.node_4{
+			width: 80px;
+			height: 80px;
+		}
+		.node_5{
+			width: 7px;
+			height: 20px;
+		}
+	
+	</style>
+	<body>
+		<div class="node_1">        <!--根节点 -->          
+			1<div class="node_2">
+				2<div class="node_3">3
+				  <div class="node_4">
+				     4<div class="node_5">5</div>
+				     <div class="node_5">5</div>
+				   </div>
+				   <div class="node_4">
+				     4<div class="node_5">5</div>
+				     <div class="node_5">5</div>
+				   </div>
+				</div>
+				 <div class="node_3">3
+				   <div class="node_4">4
+				     <div class="node_5">5</div>
+				     <div class="node_5">5</div>
+				   </div>
+				   <div class="node_4">4
+				     <div class="node_5">5</div>
+				     <div class="node_5">5</div>
+				   </div>
+				 </div>
+			</div>
+			<div class="node_2">
+				2<div class="node_3">3
+				   <div class="node_4">4
+				     <div class="node_5">5</div>
+				     <div class="node_5">5</div>
+				   </div>
+				   <div class="node_4">4
+				     <div class="node_5">5</div>
+				     <div class="node_5">5</div>
+				   </div>
+				</div>
+				 <div class="node_3">3
+				    <div class="node_4">4
+				     <div class="node_5">5</div>
+				     <div class="node_5">5</div>
+				   </div>
+				   <div class="node_4">4
+				     <div class="node_5">5</div>
+				     <div class="node_5">5</div>
+				   </div>
+				 </div>
+			</div>
+		</div>
+		<input type="button" value="前序" />  <!--触动前序排列的按钮 根左右-->
+		<input type="button" value="中序" />  <!--触动中序排列的按钮 左根右-->
+		<input type="button" value="后序" />  <!--触动后序排列的按钮 左右根-->
+		<script type="text/javascript">
+			
+			var btn = document.getElementsByTagName("input"),
+			    preBtn = btn[0],
+			    inBtn = btn[1],
+			    lastBtn = btn[2],
+			    treeNodes = [], //按照遍历节点顺序记录的各个节点
+			    treeRoot = document.getElementsByClassName('node_1')[0],   //获得根节点
+			    timer = null; //用做清除setInterval();
+			
+			window.onload = function(){
+				preBtn.onclick = function(){
+					reset();            //重置所有节点样式，为初始状态
+					preOrder(treeRoot); //前序遍历二叉树
+					changeColor();      //按照遍历的顺序改变节点的颜色
+				}
+				inBtn.onclick = function(){
+					reset();
+					inOrder(treeRoot);
+					changeColor();
+				}
+				lastBtn.onclick = function(){
+					reset();
+					lastOrder(treeRoot);
+					changeColor();
+				}
+			}
+			function preOrder(node){
+				if(!(node == null)){
+					treeNodes.push(node);      
+					preOrder(node.firstElementChild);
+					preOrder(node.lastElementChild);
+				}
+			}
+			function inOrder(node){
+				if(!(node == null)){
+					
+					inOrder(node.firstElementChild);
+					treeNodes.push(node);
+					inOrder(node.lastElementChild);
+				}
+			}
+			function lastOrder(node){
+				if(!(node == null)){
+					
+					lastOrder(node.firstElementChild);
+					lastOrder(node.lastElementChild);
+					treeNodes.push(node);
+				}
+			}
+			function changeColor(){
+				var i = 0;
+				treeNodes[i].style.backgroundColor = "#63B8FF";    //使遍历的第一个节点改变背景颜色
+				timer = setInterval(function(argument){
+					i++;
+					if(i < treeNodes.length){
+						treeNodes[i-1].style.backgroundColor = "white";  //使上一个节点变成原始颜色
+						treeNodes[i].style.backgroundColor = "#63B8FF";  //使当前节点改变背景颜色
+					}else{
+						
+						clearInterval(timer);                            //清除clearInterval()
+						treeNodes[i-1].style.backgroundColor = "white";  //因为又执行i++，所以如果改变组后一个元素颜色需要i-1
+					}
+				},700)
+			}
+			function reset(){                 //重置函数
+				treeNodes = [];
+				clearInterval(timer);
+				var divs = document.getElementsByTagName('div');
+				for (var i = 0; i < divs.length; i++) {
+					divs[i].style.backgroundColor = "white";
+					
+				}
+			}
+		</script>
+		
+	</body>
+</html>
