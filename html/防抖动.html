@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖动</title>
+    <style>
+        #gotop{
+            width: 65px;
+            height:65px;
+            background-color: orange;
+            position: fixed;
+            bottom: 100px;
+            right: 100px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div id='gotop'>回到顶部</div>
+    <img src="../img/locked.jpeg" alt="">
+    <img src="../img/logo.png" alt="">
+    <img src="../img/鬼灭之刃.jpg" alt="">
+    <script>
+        var gotop = document.getElementById('gotop')
+        /*
+        * fn [function] 需要防抖的函数
+        * delay [number] 毫秒，防抖期限值
+        */
+        function debounce(fn,delay){
+            let timer = null //借助闭包
+            return function() {
+                if(timer){
+                    clearTimeout(timer) 
+                }
+                timer = setTimeout(fn,delay) // 简化写法
+            }
+        }
+        // 然后是旧代码
+        function showTop  () {
+            var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        　　console.log('滚动条位置：' + scrollTop);
+        }
+        gotop.onclick = debounce(showTop,1000) // 为了方便观察效果我们取个大点的间断值，实际使用根据需要来配置
+        // 节流
+        function thorttle (fn,delay) {
+            let valid = true
+            return function () {
+                if (!valid) {
+                    return false
+                }
+                valid = false
+                setTimeout(() => {
+                    fn()
+                    valid = true
+                },delay)
+            }
+        }
+        window.onscroll = thorttle(showTop,1000)
+    </script>
+</body>
+</html>
